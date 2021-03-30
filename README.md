@@ -1,1 +1,1 @@
-# -tuya-edge-driver-sdk-go
+# tuya-edge-driver-sdk-go
