@@ -1,4 +1,4 @@
-# Go Device Service SDK
+# Tuya-edge-driver-sdk-go
 
 ## Overview
 
