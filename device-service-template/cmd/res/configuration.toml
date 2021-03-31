@@ -1,0 +1,42 @@
+[Writable]
+LogLevel = 'DEBUG'
+
+[Service]
+ID = "0c533a5c-8821-46c0-9a67-26491e44739e" # 实例启动时自动填充
+deviceLibraryId = "1234567890" # 实例启动时自动填充
+BootTimeout = 30000
+CheckInterval = '10s'
+Host = 'localhost'
+ServerBindAddr = ''  # blank value defaults to Service.Host value
+Port = 49990
+Protocol = 'http'
+StartupMsg = 'device simple started'
+Timeout = 20000
+Labels = []
+EnableAsyncReadings = true
+AsyncBufferSize = 1
+
+[Clients] # 启动时自动填充
+  [Clients.Data]
+  Protocol = 'http'
+  Host = 'localhost'
+  Port = 48080
+
+  [Clients.Metadata]
+  Protocol = 'http'
+  Host = 'localhost'
+  Port = 48081
+
+[Device]  # 南向服务运行时需要的配置
+  DataTransform = true
+  InitCmd = ''
+  InitCmdArgs = ''
+  MaxCmdOps = 128
+  MaxCmdValueLen = 256
+  RemoveCmd = ''
+  RemoveCmdArgs = ''
+  ProfilesDir = './res'
+  UpdateLastConnected = false
+  [Device.Discovery]
+    Enabled = false
+    Interval = '30s'
