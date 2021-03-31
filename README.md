@@ -1,6 +1,6 @@
 # Go Device Service SDK
 
-### **[English](http://readme.md/) | [中文版](http://readme_cn.md/)**
+### **[English](readme.md) | [中文版](readme_cn.md)**
 
 ## Overview
 
