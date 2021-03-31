@@ -12,8 +12,10 @@
 
 ## 技术支持
 
-Tuya IoT 开发者平台: https://developer.tuya.com/en/
+Tuya IoT 开发者平台: https://developer.tuya.com/en
+
 Tuya 开发者帮助中心: https://support.tuya.com/en/help
+
 Tuya 工单系统: https://service.console.tuya.com/
 
 ## License

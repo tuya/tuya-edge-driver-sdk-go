@@ -1,5 +1,7 @@
 # Go Device Service SDK
 
+### **[English](http://readme.md/) | [中文版](http://readme_cn.md/)**
+
 ## Overview
 
 The SDK is used to develop southbound device services connected to tuya edge gateway.
@@ -13,7 +15,9 @@ Please refer to the southbound device service development template **device-serv
 ## Technical Support
 
 Tuya IoT Developer Platform: https://developer.tuya.com/en/
+
 Tuya Developer Help Center: https://support.tuya.com/en/help
+
 Tuya Work Order System: https://service.console.tuya.com/
 
 ## License
