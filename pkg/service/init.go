@@ -39,7 +39,6 @@ func (b *Bootstrap) BootstrapHandler(ctx context.Context, wg *sync.WaitGroup, st
 	ds.UpdateFromContainer(b.router, dic)
 	autoevent.NewManager(ctx, wg, ds.config.Service.AsyncBufferSize, dic)
 
-	// 由服务自注册改为通过ID更新服务配置
 	if err := ds.updateService(); err != nil {
 		ds.LoggingClient.Error(fmt.Sprintf("update device service instance config error: %v\n", err))
 		return false
@@ -76,7 +75,6 @@ func (b *Bootstrap) BootstrapHandler(ctx context.Context, wg *sync.WaitGroup, st
 		container.ProtocolDriverName: func(get di.Get) interface{} {
 			return ds.driver
 		},
-		//v2
 		container.DeviceServiceName: func(get di.Get) interface{} {
 			return ds.deviceService
 		},

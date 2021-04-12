@@ -25,7 +25,7 @@ type ConfigurationStruct struct {
 	// DeviceList is the list of pre-define Devices
 	DeviceList []DeviceConfig `consul:"-"`
 	// Driver is a string map contains customized configuration for the protocol driver implemented based on Device SDK
-	Driver map[string]string
+	Driver map[string]interface{}
 	// SecretStore contains information for connecting to the secure SecretStore (Vault) to retrieve or store secrets
 	SecretStore config.SecretStoreInfo
 }

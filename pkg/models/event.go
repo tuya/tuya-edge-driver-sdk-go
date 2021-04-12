@@ -19,7 +19,6 @@ type Event struct {
 
 // HasBinaryValue confirms whether an event contains one or more
 // readings populated with a BinaryValue payload.
-// TODO
 func (e Event) HasBinaryValue() bool {
 	if len(e.Readings) > 0 {
 		for r := range e.Readings {

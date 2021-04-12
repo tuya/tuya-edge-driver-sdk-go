@@ -23,7 +23,7 @@ const (
 	HttpProto  = "HTTP"
 
 	ConfigStemDevice   = "edgex/devices/"
-	ConfigMajorVersion = "1.0/"
+	ConfigMajorVersion = "2.0/"
 
 	APICallbackRoute        = contracts.ApiCallbackRoute
 	APIValueDescriptorRoute = contracts.ApiValueDescriptorRoute

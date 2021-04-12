@@ -58,7 +58,6 @@ type ServiceInfo struct {
 	// AsyncBufferSize defines the size of asynchronous channel
 	AsyncBufferSize int
 
-	// shit
 	DeviceLibraryId string
 }
 

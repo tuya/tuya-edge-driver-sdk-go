@@ -481,7 +481,6 @@ func (c *CommandProcessor) commandValuesToEvent(cvs []*dsModels.CommandValue, cm
 
 		lc.Debug(fmt.Sprintf("command value: %+v", cv))
 
-		// Todo float encoding
 		reading := commandValueToReading(cv, c.device.Name, c.device.ProfileName, dr.Properties.MediaType, "")
 		readings = append(readings, reading)
 

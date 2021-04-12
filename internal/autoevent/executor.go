@@ -67,28 +67,6 @@ func (e *Executor) Run(ctx context.Context, wg *sync.WaitGroup, dic *di.Containe
 			}
 
 			if len(er.Event.Readings) > 0 {
-				// TODO 等compareReadings
-				/*
-					if e.autoEvent.OnChange {
-						if compareReadings(e, er.Event.Readings, lc) {
-							lc.Debug(fmt.Sprintf("AutoEvent - readings are the same as previous one %v", e.lastReadings))
-							continue
-						}
-					}
-				*/
-				/*
-					if evt.HasBinaryValue() {
-						lc.Debug("AutoEvent - pushing CBOR event")
-					} else {
-						lc.Debug(fmt.Sprintf("AutoEvent - pushing event %s", evt.String()))
-					}
-						event := &dsModels.Event{Event: evt.Event}
-						// Attach origin timestamp for events if none yet specified
-						if event.Origin == 0 {
-							event.Origin = common.GetUniqueOrigin()
-						}
-				*/
-
 				// After the auto event executes a read command, it will create a goroutine to send out events.
 				// When the concurrent auto event amount becomes large, core-data might be hard to handle so many HTTP requests at the same time.
 				// The device service will get some network errors like EOF or Connection reset by peer.

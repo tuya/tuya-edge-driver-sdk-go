@@ -130,87 +130,6 @@ func (s *DeviceService) Stop(force bool) {
 	autoevent.GetManager().StopAutoEvents()
 }
 
-/*
-func (s *DeviceService) selfRegister() eErr.EdgeX {
-	// 1 search
-	ctx := context.WithValue(context.Background(), common.CorrelationHeader, uuid.New().String())
-	s.LoggingClient.Debug("Trying to find  DeviceService: " + s.ServiceName)
-	dsr, err := s.tedgeClients.DeviceServiceClient.DeviceServiceByName(ctx, s.ServiceName)
-	if err != nil { // 3. not exists add new
-		if errsc, ok := err.(eErr.EdgeX); ok && (errsc.Code() == http.StatusNotFound) {
-			s.LoggingClient.Info(fmt.Sprintf(" DeviceService %s doesn't exist, creating a new one", s.ServiceName))
-			ba := config.ClientInfo{
-				Host:     s.config.Service.Host,
-				Port:     s.config.Service.Port,
-				Protocol: s.config.Service.Protocol,
-			}
-			newDeviceService := dtos.DeviceService{
-				//Name: s.ServiceName,
-				Labels:          s.config.Service.Labels,
-				BaseAddress:     ba.Url(),
-				AdminState:      models.Unlocked,
-				DeviceLibraryId: s.config.Service.DeviceLibraryId,
-				Config: models.DeviceServiceConfig{
-					Server: models.DeviceServiceConfigServer{
-						Protocol: s.config.Service.Protocol,
-						Port:     s.config.Service.Port,
-					},
-				},
-			}
-			req := requests.AddDeviceServiceRequest{
-				Service: newDeviceService,
-			}
-			reqs := make([]requests.AddDeviceServiceRequest, 0, 1)
-			reqs = append(reqs, req)
-			resp, err := s.tedgeClients.DeviceServiceClient.Add(ctx, reqs)
-			if err != nil {
-				s.LoggingClient.Error(fmt.Sprintf("Failed to add  Deviceservice %s: %v", s.ServiceName, err))
-				return err
-			}
-			if err := common.VerifyIdFormat(resp[0].Id, "Device Service"); err != nil {
-				return err
-			}
-			// NOTE - this differs from Addressable and Device Resources,
-			// neither of which require the '.Service'prefix
-			newDeviceService.Id = resp[0].Id
-			// TODO device service by name again
-			s.deviceService = newDeviceService
-			s.LoggingClient.Debug("New DeviceService Id: " + newDeviceService.Id)
-		} else {
-			s.LoggingClient.Error(fmt.Sprintf("DeviceServicForName failed: %v", err))
-			return err
-		}
-	} else { // 2. exists update
-		s.LoggingClient.Info(fmt.Sprintf("DeviceService %s exists, updating it", dsr.Service.Name))
-		id := dsr.Service.Id
-		name := s.ServiceName
-		unlock := models.Unlocked
-		ba := s.config.Clients[common.ClientMetadata].Url()
-		update := dtos.UpdateDeviceService{
-			Id:          &id,
-			Name:        &name,
-			Labels:      s.config.Service.Labels,
-			BaseAddress: &ba,
-			AdminState:  &unlock,
-		}
-		req := requests.UpdateDeviceServiceRequest{
-			Service: update,
-		}
-		reqs := make([]requests.UpdateDeviceServiceRequest, 0, 1)
-		reqs = append(reqs, req)
-		resp, err := s.tedgeClients.DeviceServiceClient.Update(ctx, reqs)
-		if err != nil {
-			s.LoggingClient.Error(fmt.Sprintf("Failed to update  DeviceService %s: %v, %v", s.deviceService.Id, err, resp))
-			return err
-		}
-		s.deviceService.Labels = s.config.Service.Labels
-		s.deviceService.BaseAddress = ba
-		s.deviceService.AdminState = unlock
-	}
-	return nil
-}
-*/
-
 func (s *DeviceService) updateService() eErr.EdgeX {
 	// 获取驱动实例ID
 	id := s.config.Service.ID
@@ -267,6 +186,6 @@ func RunningService() *DeviceService {
 }
 
 // DriverConfigs retrieves the driver specific configuration
-func DriverConfigs() map[string]string {
+func DriverConfigs() map[string]interface{} {
 	return ds.config.Driver
 }

@@ -15,8 +15,6 @@ import (
 	"github.com/tuya/tuya-edge-driver-sdk-go/pkg/service"
 )
 
-// TODO change error code
-
 func Bootstrap(serviceName string, serviceVersion string, driver interface{}) {
 	ctx, cancel := context.WithCancel(context.Background())
 	service.Main(serviceName, serviceVersion, driver, ctx, cancel, mux.NewRouter())

@@ -55,7 +55,7 @@ func InitCache(serviceName string,
 				lc.Error(fmt.Sprintf("get device profile(%s) error: %+v", dcs[i].ProfileName, err))
 				continue
 			}
-			dpMap[dcs[i].Name] = struct{}{}
+			dpMap[dcs[i].ProfileName] = struct{}{}
 			dps = append(dps, dtos.ToDeviceProfileModel(dpr.Profile))
 		}
 		newProfileCache(dps)

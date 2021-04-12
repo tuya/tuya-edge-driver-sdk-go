@@ -73,52 +73,12 @@ func CommandValueToReading(cv *dsModels.CommandValue, devName, profileName, medi
 			Value:       cv.ValueToString(encoding),
 		}
 	}
-	/*
-		reading := models.Reading{ResourseName: cv.DeviceResourceName, Device: devName, ValueType: cv.Type}
-		if cv.Type == contracts.ValueTypeBool {
-			reading.BinaryValue = cv.BinValue
-			reading.MediaType = mediaType
-		} else if cv.Type == contracts.ValueTypeFloat32 || cv.Type == contracts.ValueTypeFloat64 {
-			reading.Value = cv.ValueToString(encoding)
-			reading.FloatEncoding = encoding
-		} else {
-			reading.Value = cv.ValueToString(encoding)
-		}
-
-		// if value has a non-zero Origin, use it
-		if cv.Origin > 0 {
-			reading.Origin = cv.Origin
-		} else {
-			reading.Origin = time.Now().UnixNano()
-		}
-
-		return reading
-	*/
 }
 
 // models to dtos
 func SendEvent(event dtos.Event, lc logger.LoggingClient, ec interfaces.EventClient) {
 	correlation := uuid.New().String()
 	ctx := context.WithValue(context.Background(), CorrelationHeader, correlation)
-	/*
-		if event.HasBinaryValue() {
-			ctx = context.WithValue(ctx, contracts.ContentType, contracts.ContentTypeCBOR)
-		} else {
-			ctx = context.WithValue(ctx, contracts.ContentType, contracts.ContentTypeJSON)
-		}
-		// Call MarshalEvent to encode as byte array whether event contains binary or JSON readings
-		var err error
-		if len(event.EncodedEvent) <= 0 {
-			event.EncodedEvent, err = ec.MarshalEvent(event.Event)
-			if err != nil {
-				lc.Error("SendEvent: Error encoding event", "device", event.Device, contracts.CorrelationHeader, correlation, "error", err)
-			} else {
-				lc.Debug("SendEvent: EventClient.MarshalEvent encoded event", contracts.CorrelationHeader, correlation)
-			}
-		} else {
-			lc.Debug("SendEvent: EventClient.MarshalEvent passed through encoded event", contracts.CorrelationHeader, correlation)
-		}
-	*/
 	req := requests.AddEventRequest{
 		BaseRequest: common.NewBaseRequest(),
 		Event:       event,
@@ -132,135 +92,6 @@ func SendEvent(event dtos.Event, lc logger.LoggingClient, ec interfaces.EventCli
 		lc.Trace("SendEvent: Pushed this event to core data", contracts.ContentType, context2.FromContext(ctx, contracts.ContentType), contracts.CorrelationHeader, correlation, "event", event)
 	}
 }
-
-//func CompareCoreCommands(a []models.Command, b []models.Command) bool {
-//	if len(a) != len(b) {
-//		return false
-//	}
-//
-//	for i := range a {
-//		if a[i].String() != b[i].String() {
-//			return false
-//		}
-//	}
-//
-//	return true
-//}
-
-//func CompareDevices(a models.Device, b models.Device) bool {
-//	labelsOk := CompareStrings(a.Labels, b.Labels)
-//	profileOk := CompareDeviceProfiles(a.Profile, b.Profile)
-//	serviceOk := CompareDeviceServices(a.Service, b.Service)
-//
-//	return reflect.DeepEqual(a.Protocols, b.Protocols) &&
-//		a.AdminState == b.AdminState &&
-//		a.Description == b.Description &&
-//		a.Id == b.Id &&
-//		a.Location == b.Location &&
-//		a.Name == b.Name &&
-//		a.OperatingState == b.OperatingState &&
-//		labelsOk &&
-//		profileOk &&
-//		serviceOk
-//}
-
-//func CompareDeviceProfiles(a models.DeviceProfile, b models.DeviceProfile) bool {
-//	labelsOk := CompareStrings(a.Labels, b.Labels)
-//	cmdsOk := CompareCoreCommands(a.CoreCommands, b.CoreCommands)
-//	devResourcesOk := CompareDeviceResources(a.DeviceResources, b.DeviceResources)
-//	resourcesOk := CompareDeviceCommands(a.DeviceCommands, b.DeviceCommands)
-//
-//	// TODO: DeviceResource fields aren't compared as to dr properly
-//	// requires introspection as DeviceResource is a slice of interface{}
-//
-//	return a.DescribedObject == b.DescribedObject &&
-//		a.Id == b.Id &&
-//		a.Name == b.Name &&
-//		a.Manufacturer == b.Manufacturer &&
-//		a.Model == b.Model &&
-//		labelsOk &&
-//		cmdsOk &&
-//		devResourcesOk &&
-//		resourcesOk
-//}
-
-//func CompareDeviceResources(a []models.DeviceResource, b []models.DeviceResource) bool {
-//	if len(a) != len(b) {
-//		return false
-//	}
-//
-//	for i := range a {
-//		// TODO: Attributes aren't compared, as to dr properly
-//		// requires introspection as Attributes is an interface{}
-//
-//		if a[i].Description != b[i].Description ||
-//			a[i].Name != b[i].Name ||
-//			a[i].Tag != b[i].Tag ||
-//			a[i].Properties != b[i].Properties {
-//			return false
-//		}
-//	}
-//
-//	return true
-//}
-
-//func CompareDeviceServices(a models.DeviceService, b models.DeviceService) bool {
-//	serviceOk := CompareServices(a, b)
-//	return a.AdminState == b.AdminState && serviceOk
-//}
-//
-//func CompareDeviceCommands(a []models.ProfileResource, b []models.ProfileResource) bool {
-//	if len(a) != len(b) {
-//		return false
-//	}
-//
-//	for i := range a {
-//		getOk := CompareResourceOperations(a[i].Get, b[i].Set)
-//		setOk := CompareResourceOperations(a[i].Get, b[i].Set)
-//
-//		if a[i].Name != b[i].Name && !getOk && !setOk {
-//			return false
-//		}
-//	}
-//
-//	return true
-//}
-
-//func CompareResourceOperations(a []models.ResourceOperation, b []models.ResourceOperation) bool {
-//	if len(a) != len(b) {
-//		return false
-//	}
-//
-//	for i := range a {
-//		secondaryOk := CompareStrings(a[i].Secondary, b[i].Secondary)
-//		mappingsOk := CompareStrStrMap(a[i].Mappings, b[i].Mappings)
-//
-//		if a[i].Index != b[i].Index ||
-//			a[i].Operation != b[i].Operation ||
-//			a[i].DeviceResource != b[i].DeviceResource ||
-//			a[i].Parameter != b[i].Parameter ||
-//			a[i].DeviceCommand != b[i].DeviceCommand ||
-//			!secondaryOk ||
-//			!mappingsOk {
-//			return false
-//		}
-//	}
-//
-//	return true
-//}
-//
-//func CompareServices(a models.DeviceService, b models.DeviceService) bool {
-//	labelsOk := CompareStrings(a.Labels, b.Labels)
-//
-//	return a.DescribedObject == b.DescribedObject &&
-//		a.Id == b.Id &&
-//		a.Name == b.Name &&
-//		a.LastConnected == b.LastConnected &&
-//		a.LastReported == b.LastReported &&
-//		a.OperatingState == b.OperatingState &&
-//		a.Addressable == b.Addressable &&
-//		labelsOk
-//}
 
 func CompareStrings(a []string, b []string) bool {
 	if len(a) != len(b) {
