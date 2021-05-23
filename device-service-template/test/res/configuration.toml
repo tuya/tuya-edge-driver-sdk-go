@@ -40,8 +40,8 @@ RemoveCmdArgs = ''          # 指定在构建RemoveCmd时使用的参数 | strin
 ProfilesDir = './res'       # 指定一个包含设备概要文件的目录，这些文件应该在启动时导入 | string | - ｜ 必填
 UpdateLastConnected = false # 指定是否在元数据中更新设备的最后连接时间戳 | bool | true/false | false
 [Device.Discovery]          # 用于自动发现设备，暂不支持该功能，所以可以不必填写
-  Enabled = false
-  Interval = '30s'
+Enabled = false
+Interval = '30s'
 
 [[DeviceList]] # DeviceList是预定义设备的列表, 该设备列表通过后台配置，这里不需要填写
 

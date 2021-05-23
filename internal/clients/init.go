@@ -58,7 +58,7 @@ func InitDependencyClients(ctx context.Context, startupTimer startup.Timer, dic 
 		return false
 	}
 
-	if checkDependencyServices(ctx, startupTimer, dic) == false {
+	if CheckDependencyServices(ctx, startupTimer, dic) == false {
 		return false
 	}
 
@@ -91,7 +91,7 @@ func validateClientConfig(configuration *common.ConfigurationStruct) error {
 	return nil
 }
 
-func checkDependencyServices(ctx context.Context, startupTimer startup.Timer, dic *di.Container) bool {
+func CheckDependencyServices(ctx context.Context, startupTimer startup.Timer, dic *di.Container) bool {
 	var dependencyList = []string{common.ClientData, common.ClientMetadata}
 	var waitGroup sync.WaitGroup
 	checkingErr := true

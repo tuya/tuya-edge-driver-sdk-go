@@ -1,0 +1,19 @@
+{
+  "apiVersion": "v2",
+  "requestId": "",
+  "message": "",
+  "statusCode": 200,
+  "service": {
+    "apiVersion": "v2",
+    "id": "驱动实例id1",
+    "name": "驱动实例编号1",
+    "baseAddress": "http://localhost:49990",
+    "adminState": "UNLOCKED",
+    "serviceName": "驱动实例名称1",
+    "deviceLibraryId": "在驱动库中的id",
+    "这是config的注释": "config 是文件./res/configuration.toml中的[driver]下的配置信息。",
+    "config": {
+    },
+    "dockerContainerId": ""
+  }
+}

@@ -1,0 +1,89 @@
+{
+    "apiVersion": "v2",
+    "requestId": "",
+    "message": "",
+    "statusCode": 200,
+    "profile": {
+        "apiVersion": "v2",
+        "id": "产品1",
+        "注释name":"name是产品编号，没特殊要求的话，id和name值是一样的。所以下面值也为：产品1",
+        "name": "产品1",
+        "displayName": "自定义产品名称",
+        "description": "产品描述，比如这是一个什么产品",
+        "deviceResources": [
+            {
+                "description": "",
+                "name": "1",
+                "tag": "",
+                "properties": {
+                    "dataType": 1,
+                    "type": "Bool",
+                    "readWrite": "RW"
+                },
+                "attributes": {}
+            },
+            {
+                "description": "",
+                "name": "9",
+                "tag": "",
+                "properties": {
+                    "dataType": 2,
+                    "type": "Int16",
+                    "readWrite": "RW",
+                    "shift": "1",
+                    "scale": "1"
+                },
+                "attributes": {}
+            }
+        ],
+        "deviceCommands": [
+            {
+                "name": "1",
+                "get": [
+                    {
+                        "deviceResource": "1",
+                        "parameter": "",
+                        "mappings": null
+                    }
+                ],
+                "set": [
+                    {
+                        "deviceResource": "1",
+                        "parameter": "false",
+                        "mappings": null
+                    }
+                ]
+            },
+            {
+                "name": "9",
+                "get": [
+                    {
+                        "deviceResource": "9",
+                        "parameter": "",
+                        "mappings": null
+                    }
+                ],
+                "set": [
+                    {
+                        "deviceResource": "9",
+                        "parameter": "false",
+                        "mappings": null
+                    }
+                ]
+            }
+        ],
+        "coreCommands": [
+            {
+                "name": "1",
+                "get": true,
+                "put": true
+            },
+            {
+                "name": "9",
+                "get": true,
+                "put": true
+            }
+        ],
+        "deviceLibraryId": "在驱动库中的id"
+    }
+}

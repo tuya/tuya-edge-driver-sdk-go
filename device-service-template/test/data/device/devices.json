@@ -1,0 +1,39 @@
+{
+  "apiVersion": "v2",
+  "requestId": "",
+  "message": "",
+  "statusCode": 200,
+  "total": 1,
+  "devices": [
+    {
+      "apiVersion": "v2",
+      "id": "设备id1",
+      "name": "设备编号1",
+      "displayName": "设备的描述信息，用了什么协议，作用等等",
+      "adminState": "UNLOCKED",
+      "operatingState": "UNKNOWN",
+      "location": null,
+      "serviceName": "驱动实例编号1",
+      "注释profileName":"这是产品编号，初始化时要根据产品编号去查对应的产品信息",
+      "profileName": "产品1",
+      "注释autoEvents":"这是产品自动事件",
+      "autoEvents": [
+        {
+          "注释frequency":"执行间隔时间",
+          "frequency": "20s",
+          "注释resource":"dp点id",
+          "resource": "1"
+        },
+        {
+          "frequency": "20s",
+          "resource": "9"
+        }
+      ],
+      "serviceId": "驱动实例id1",
+      "profileId": "产品1",
+      "注释activeStatus":"设备的激活状态",
+      "activeStatus": "activated",
+      "cloudDeviceId": "产品的子设备管理的云设备id"
+    }
+  ]
+}
