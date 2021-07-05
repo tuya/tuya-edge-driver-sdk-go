@@ -1,0 +1,53 @@
+id: "e6e8a2f4-eb14-4649-9e2b-175247911368"
+name: "e6e8a2f4-eb14-4649-9e2b-175247911368"
+displayName: "Sample Service"
+manufacturer: "Tuya"
+model: "Sample Service - Tuya"
+labels:
+  - "sample-service-template"
+description: "Example of a Sample Service for developers."
+deviceLibraryId: "1234567890"
+
+deviceResources:
+  - name: "RandomValue_Int8"
+    description: "Generate random int8 value"
+    properties: {
+        dataType: 1, # 参考定义
+        type: "Int8",
+        readWrite: "R",
+        minimum: "-128",
+        maximum: "127",
+        defaultValue: "0",
+      }
+  - name: "Min_Int8"
+    description: "Minimum of random int8 value"
+    properties: {
+        dataType: 1, # 参考定义
+        type: "Int8",
+        readWrite: "R",
+        minimum: "-128",
+        maximum: "127",
+        defaultValue: "-128",
+      }
+  - name: "Max_Int8"
+    description: "Maximum of random int8 value"
+    properties: {
+        dataType: 1, # 参考定义
+        type: "Int8",
+        readWrite: "R",
+        minimum: "-128",
+        maximum: "127",
+        defaultValue: "127",
+      }
+
+deviceCommands:
+  - name: "GenerateRandomValue_Int8"
+    get:
+      - { deviceResource: "RandomValue_Int8" }
+    set:
+      - { deviceResource: "Min_Int8" }
+      - { deviceResource: "Max_Int8" }
+
+coreCommands:
+  - name: "GenerateRandomValue_Int8"
+    get: true

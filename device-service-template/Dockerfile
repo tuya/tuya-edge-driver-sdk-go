@@ -3,7 +3,7 @@
 ARG BASE=golang:1.15-alpine3.12
 FROM ${BASE} AS builder
 
-ARG MAKE='make build'
+ARG MAKE='make cmd/device-service-template'
 
 WORKDIR /device-service-template
 
@@ -12,7 +12,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 
 RUN apk add --update --no-cache make git
 
-COPY /device-service-template .
+COPY . .
 
 RUN ${MAKE}
 

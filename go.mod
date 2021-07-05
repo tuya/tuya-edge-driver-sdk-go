@@ -4,6 +4,7 @@ go 1.15
 
 require (
 	bitbucket.org/bertimus9/systemstat v0.0.0-20180207000608-0eeff89b0690
+	bou.ke/monkey v1.0.2
 	github.com/OneOfOne/xxhash v1.2.8
 	github.com/edgexfoundry/go-mod-bootstrap/v2 v2.0.0-dev.4
 	github.com/fxamacker/cbor/v2 v2.2.0
